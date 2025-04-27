@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-50 text-slate-800 font-sans antialiased;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent;
+}
+
+.nav-link {
+  @apply relative px-4 py-2 text-slate-800 hover:text-blue-600 transition-colors duration-300;
+}
+
+.nav-link::after {
+  @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+}
+
+/* Card hover effect */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Gradient border */
+.gradient-border {
+  @apply relative;
+}
+
+.gradient-border::before {
+  @apply content-[''] absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-blue-500 to-purple-500 -z-10;
+}
+
+.gradient-border:hover::before {
+  @apply p-[2px];
+}
+
+/* Animated background */
+.animated-bg {
+  @apply relative overflow-hidden;
+}
+
+.animated-bg::before {
+  @apply content-[''] absolute inset-0 bg-gradient-to-r from-blue-50 via-slate-50 to-purple-50;
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
