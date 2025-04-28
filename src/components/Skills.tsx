@@ -1,103 +1,70 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { skills } from '../data';
 import SectionTitle from './ui/SectionTitle';
 
-const skills = [
-  {
-    category: 'Programming Languages',
-    items: [
-      { name: 'Java', icon: 'devicon-java-plain colored' },
-      { name: 'Python', icon: 'devicon-python-plain colored' },
-      { name: 'C++', icon: 'devicon-cplusplus-plain colored' },
-      { name: 'R', icon: 'devicon-r-original' },
-      { name: 'SQL', icon: 'devicon-mysql-plain colored' }
-    ]
-  },
-  {
-    category: 'Frameworks & Libraries',
-    items: [
-      { name: 'Spring Boot', icon: 'devicon-spring-plain colored' },
-      { name: 'React', icon: 'devicon-react-original colored' },
-      { name: 'Node.js', icon: 'devicon-nodejs-plain colored' },
-      { name: 'Maven', icon: 'devicon-maven-plain' },
-      { name: 'HTML/CSS', icon: 'devicon-html5-plain colored' }
-    ]
-  },
-  {
-    category: 'Databases & Tools',
-    items: [
-      { name: 'MySQL', icon: 'devicon-mysql-plain colored' },
-      { name: 'MongoDB', icon: 'devicon-mongodb-plain colored' },
-      { name: 'Git', icon: 'devicon-git-plain colored' },
-      { name: 'GitHub', icon: 'devicon-github-original colored' },
-      { name: 'Tomcat', icon: 'devicon-tomcat-line colored' }
-    ]
-  },
-  {
-    category: 'Data Analysis & Visualization',
-    items: [
-      { name: 'Tableau Desktop', icon: 'devicon-tableau-plain colored' },
-      { name: 'Tableau Prep', icon: 'devicon-tableau-plain colored' },
-      { name: 'Excel', icon: 'devicon-excel-plain' },
-      { name: 'R', icon: 'devicon-r-original' },
-      { name: 'SQL', icon: 'devicon-mysql-plain colored' }
-    ]
-  }
-];
-
 const Skills: React.FC = () => {
+  const getIconClass = (name: string): string => {
+    const iconMap: { [key: string]: string } = {
+      JavaScript: "devicon-javascript-plain colored",
+      Python: "devicon-python-plain colored",
+      Java: "devicon-java-plain colored",
+      "C++": "devicon-cplusplus-plain colored",
+      SQL: "devicon-mysql-plain colored",
+      HTML: "devicon-html5-plain colored",
+      CSS: "devicon-css3-plain colored",
+      React: "devicon-react-original colored",
+      "Spring Boot": "devicon-spring-plain colored",
+      Maven: "devicon-maven-plain colored",
+      Bootstrap: "devicon-bootstrap-plain colored",
+      MySQL: "devicon-mysql-plain colored",
+      Git: "devicon-git-plain colored",
+      GitHub: "devicon-github-original colored",
+      Docker: "devicon-docker-plain colored",
+    };
+    return iconMap[name] || "devicon-devicon-plain";
+  };
+
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-white to-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="container mx-auto px-4">
         <SectionTitle 
           title="Technical Skills" 
-          subtitle="A comprehensive overview of my technical expertise and tools I work with"
+          subtitle="Continuously expanding my expertise in software development" 
         />
-        
-        <div className="mt-16 space-y-16">
-          {skills.map((skillGroup, index) => (
+
+        <div className="mt-16 grid gap-8">
+          {Object.entries(skills).map(([category, skillList], categoryIndex) => (
             <motion.div
-              key={skillGroup.category}
+              key={category}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-shadow duration-300"
+              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+              className="bg-white rounded-lg p-6 shadow-lg"
             >
-              <h3 className="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-4">
-                <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl">
-                  {index + 1}
-                </span>
-                {skillGroup.category}
+              <h3 className="text-2xl font-semibold text-gray-800 mb-6 capitalize">
+                {category}
               </h3>
-              
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {skillGroup.items.map((skill) => (
+                {skillList.map((skill, index) => (
                   <motion.div
                     key={skill.name}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="flex flex-col items-center gap-4 p-6 bg-slate-50 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 border border-slate-100"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="flex flex-col items-center p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
                   >
-                    <i className={`${skill.icon} text-5xl`}></i>
-                    <span className="text-lg font-semibold text-slate-800">{skill.name}</span>
+                    <i className={`${getIconClass(skill.name)} text-4xl mb-3`}></i>
+                    <span className="text-gray-800 font-medium text-center">
+                      {skill.name}
+                    </span>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
           ))}
         </div>
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-16 text-center"
-        >
-          <p className="text-slate-800 text-lg max-w-3xl mx-auto">
-            I'm constantly learning and expanding my skill set to stay current with the latest technologies and best practices in software development.
-          </p>
-        </motion.div>
       </div>
     </section>
   );

@@ -11,6 +11,7 @@ export interface Project {
   image: string;
   techStack: string[];
   githubLink: string;
+  liveLink?: string;
   overview: string;
   challenges: string[];
   methodology: string;

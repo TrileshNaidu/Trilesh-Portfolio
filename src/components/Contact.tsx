@@ -21,13 +21,13 @@ const Contact = () => {
     {
       icon: <Github className="text-blue-600" size={24} />,
       title: 'GitHub',
-      value: 'TrileshNaidu',
+      value: 'Trilesh Pavan',
       href: contactInfo.github
     },
     {
       icon: <Linkedin className="text-blue-600" size={24} />,
       title: 'LinkedIn',
-      value: 'trilesh-pavan',
+      value: 'Trilesh Pavan',
       href: contactInfo.linkedin
     }
   ];

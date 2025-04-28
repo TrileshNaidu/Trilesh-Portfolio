@@ -29,7 +29,7 @@ const Projects = () => {
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  className="w-full h-full object-cover object-top transition-transform duration-300 hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-800/80 to-transparent"></div>
               </div>
@@ -98,7 +98,7 @@ const Projects = () => {
                       <img 
                         src={projects.find(p => p.id === selectedProject)?.image} 
                         alt={projects.find(p => p.id === selectedProject)?.title}
-                        className="w-full h-64 object-cover"
+                        className="w-full h-64 object-cover object-top"
                       />
                       <button 
                         className="absolute top-4 right-4 p-2 bg-white/90 rounded-full text-slate-800 hover:bg-white transition-colors"
@@ -127,7 +127,7 @@ const Projects = () => {
                         ))}
                       </div>
                       
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-4 mb-8">
                         <motion.a
                           href={projects.find(p => p.id === selectedProject)?.githubLink}
                           target="_blank"
@@ -153,6 +153,37 @@ const Projects = () => {
                             Live Demo
                           </motion.a>
                         )}
+                      </div>
+
+                      {/* Project Details */}
+                      <div className="space-y-6">
+                        <div>
+                          <h3 className="text-lg font-semibold text-slate-800 mb-2">Overview</h3>
+                          <p className="text-slate-600">{projects.find(p => p.id === selectedProject)?.overview}</p>
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-semibold text-slate-800 mb-2">Challenges</h3>
+                          <ul className="list-disc list-inside text-slate-600 space-y-1">
+                            {projects.find(p => p.id === selectedProject)?.challenges.map((challenge, index) => (
+                              <li key={index}>{challenge}</li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-semibold text-slate-800 mb-2">Methodology</h3>
+                          <p className="text-slate-600">{projects.find(p => p.id === selectedProject)?.methodology}</p>
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-semibold text-slate-800 mb-2">Key Outcomes</h3>
+                          <ul className="list-disc list-inside text-slate-600 space-y-1">
+                            {projects.find(p => p.id === selectedProject)?.keyOutcomes.map((outcome, index) => (
+                              <li key={index}>{outcome}</li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
